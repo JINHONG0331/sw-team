@@ -1,6 +1,7 @@
-//main.dart
+// main.dart
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'src/setting_menu.dart/setting_function.dart'; // SettingsPage 임포트
 
 void main() => runApp(const LilacApp());
 
@@ -15,7 +16,7 @@ class LilacApp extends StatelessWidget {
       routes: {
         '/home': (ctx) => const HomePage(),
         '/calendar': (ctx) => const PlaceholderPage(title: '달력'),
-        '/settings': (ctx) => const PlaceholderPage(title: '설정'),
+        '/settings': (ctx) => const SettingsPage(), // 실제 설정 페이지 연결
         '/compose': (ctx) => const PlaceholderPage(title: '질문 작성'),
       },
     );

@@ -1,7 +1,8 @@
-//home_page.dart
 import 'package:flutter/material.dart';
 import 'src/question_list.dart';
 import 'src/today_question_dialog.dart';
+import 'src/weather/weather_api.dart';
+import 'src/weather/weather_function.dart'; // FuncWeather 정의 파일
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -20,7 +21,6 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-
       body: Stack(
         children: [
           /// -------------------------
@@ -31,12 +31,38 @@ class HomePage extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(top: 20),
               width: 200,
-              height: 120,
-              decoration: BoxDecoration(
-                color: Colors.blue[100],
-                borderRadius: BorderRadius.circular(12),
+              height: 150,
+              child: Center(
+                child: FutureBuilder<String>(
+                  future: fetchWeather(),
+                  builder: (context, snap) {
+                    if (snap.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(strokeWidth: 2);
+                    }
+                    if (snap.hasError) {
+                      return Text("날씨 로드 실패");
+                    }
+
+                    final data = snap.data ?? '';
+                    final parts = data.split('-');
+                    final sky = parts.isNotEmpty ? parts[0] : '';
+                    final pty = parts.length > 1 ? parts[1] : '0';
+
+                    // FuncWeather 호출
+                    final mapped = WeatherFunction.funcWeather(sky, pty);
+
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        mapped['icon'] as Widget,
+                        SizedBox(height: 6),
+                        Text("현재 날씨 - ${mapped['description']}",
+                            style: TextStyle(fontSize: 14)),
+                      ],
+                    );
+                  },
+                ),
               ),
-              child: Center(child: Text("창문/날씨 자리")),
             ),
           ),
 
