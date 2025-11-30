@@ -3,6 +3,8 @@ import 'src/question_list.dart';
 import 'src/today_question_dialog.dart';
 import 'src/weather/weather_api.dart';
 import 'src/weather/weather_function.dart'; // FuncWeather 정의 파일
+import 'widgets/lilac_character.dart'; //라일락 파일
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -74,12 +76,13 @@ class HomePage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.person, size: 120, color: Colors.purple),
-                Text("캐릭터 자리", style: TextStyle(fontSize: 18)),
+                LilacCharacter(
+                  answeredDaysCount: 7, // 또는 answeredDaysCount 변수,7(테스트용)
+                ),
+                const SizedBox(height: 12),
               ],
             ),
           ),
-
           /// -------------------------
           /// 3) 달력 버튼
           /// -------------------------
