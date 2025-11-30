@@ -52,7 +52,7 @@ class TodayQuestionDialog {
                     // TODO: 답변 저장
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
+                    backgroundColor: const Color(0xFFF3E5F5),
                   ),
                   child: Text("답변 제출"),
                 ),

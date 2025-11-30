@@ -9,11 +9,11 @@ Future<String> fetchWeather({int nx = 67, int ny = 101}) async {
   final prefs = await SharedPreferences.getInstance();
   String key = prefs.getString('weather_api_key') ?? '';
 
+  // 설정창에 api 입력이 안먹힐경우 사용하는 함수
+  // 설정창에 있는 API Key 입력창 비워두셔야 작동합니다
+  // API key는 밑 주석에서 발급받아서 하드코딩하여 사용하시면 됩니다.
+  // https://www.data.go.kr/data/15084084/openapi.do
   if (key.isEmpty) {
-    // 설정창에 api 입력이 안먹힐경우 사용하는 함수
-    // 설정창에 있는 API Key 입력창 비워두셔야 작동합니다
-    // API key는 밑 주석에서 발급받아서 하드코딩하여 사용하시면 됩니다.
-    // https://www.data.go.kr/data/15084084/openapi.do
     key = 'api키 입력';
   }
 
